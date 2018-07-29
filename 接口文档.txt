@@ -1,0 +1,127 @@
+部分接口文档
+1. 发送手机短信验证码
+
+url: /api/smscode
+method: post
+传入参数：
+json格式
+{"mobile":"18516111111", "piccode":"abcd", "piccode_id":"ccb80acc-b424-4c42-bacb-30d9c0068474"}
+参数名      参数类型    是否必须    参数说明
+mobile     string     是          用户手机号
+piccode    string     是          用户填写的图片验证码
+piccode_id string     是         图片验证码编号
+
+
+返回参数：
+json格式
+{"errcode": 0, "errmsg": "", "data":{}}
+参数名      参数类型     是否必传    参数说明
+errcode     int         是       返回状态码
+errmsg      string      是       状态描述
+data        dict        否       附带数据
+
+
+
+2.注册
+url : /api/register
+method: post
+传入参数：
+json格式
+mobile
+sms_code
+password
+
+返回值：
+json格式
+errcode
+errmsg
+
+
+3.上传房源信息/get房源信息
+url : /api/house/info
+method: post
+传入参数：
+json格式
+ # 获取参数
+        # """{
+        #     "title":"",
+        #     "price":"",
+        #     "area_id":"1",
+        #     "address":"",
+        #     "room_count":"",
+        #     "acreage":"",
+        #     "unit":"",
+        #     "capacity":"",
+        #     "beds":"",
+        #     "deposit":"",
+        #     "min_days":"",
+        #     "max_days":"",
+        #     "facility":["7","8"]
+        # }"""
+
+返回值：
+errcode
+errmsg
+house_id
+
+
+
+method : get
+传入参数：
+query string
+house_id
+
+返回值
+errcode
+errmsg
+data={
+	
+ "hid":house_id,
+            "user_id":''
+            "title":'',
+            "price":'',
+            "address":'',
+            "room_count":'',
+            "acreage":'',
+            "unit":'',
+            "capacity":'',
+            "beds":'',
+            "deposit":'',
+            "min_days":'',
+            "max_days":'',
+            "user_name":'',
+            "user_avatar":''
+}
+user_id
+
+
+
+
+4.房屋过滤列表数据
+url : /api/house/list
+method: get
+传入参数：
+   """
+        传入参数说明
+        start_date 用户查询的起始时间 sd     非必传   ""          "2017-02-28"
+        end_date    用户查询的终止时间 ed    非必传   ""
+        area_id     用户查询的区域条件   aid 非必传   ""
+        sort_key    排序的关键词     sk     非必传   "new"      "new" "booking" "price-inc"  "price-des"
+        page        返回的数据页数     p     非必传   1
+
+返回值：
+json格式
+errcode
+errmsg
+
+data={
+	 # house_id = l["hi_house_id"],
+        # title = l["hi_title"],
+        # price = l["hi_price"],
+        # room_count = l["hi_room_count"],
+        # address = l["hi_address"],
+        # order_count = l["hi_order_count"],
+        # avatar = constants.QINIU_URL_PREFIX + l["up_avatar"] if l.get("up_avatar") else "",
+        # image_url = constants.QINIU_URL_PREFIX + l["hi_index_image_url"] if l.get("hi_index_image_url") else ""
+}
+total_page #总页数
